@@ -23,8 +23,8 @@ int main() {
     scanf("%d", &pontosTuristicos1);
 
     // Cálculo da densidade populacional e PIB per capita para a primeira cidade
-    float densidadePopulacional1 = populacao1 / area1;
-    float pibPerCapita1 = (pib1 * 1000000000) / populacao1;
+    densidadePopulacional1 = populacao1 / area1;
+    pibPerCapita1 = (pib1 * 1e9) / populacao1; // Convertendo PIB de bilhões para reais
 
     // Exibição dos resultados da primeira carta
     printf("\nCarta 1:\n");
@@ -59,9 +59,9 @@ int main() {
     printf("Digite o número de pontos turísticos da cidade 2: ");
     scanf("%d", &pontosTuristicos2);
 
-     // Calcular a Densidade Populacional e o PIB per capita
-     float densidadePopulacional2 = populacao2 / area2;
-     float pibPerCapita2 = (pib2 * 1000000000) / populacao2;
+     // Cálculo da densidade populacional e PIB per capita para a segunda cidade
+    densidadePopulacional2 = populacao2 / area2;
+    pibPerCapita2 = (pib2 * 1e9) / populacao2; // Convertendo PIB de bilhões para reais
 
      // Exibição dos resultados da segunda carta
     printf("\nCarta 2:\n");
