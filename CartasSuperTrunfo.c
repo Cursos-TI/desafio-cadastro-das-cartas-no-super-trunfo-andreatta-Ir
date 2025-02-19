@@ -12,7 +12,7 @@ int main() {
 
     // Leitura dos dados da primeira carta
     printf("Digite o estado (A-H) da Carta 1: ");
-    scanf(" %c", &estado1);
+    scanf(" %c", &estado1);  // Espaço antes de %c para evitar problemas com buffer
     printf("Digite o código da Carta 1 (ex: A01): ");
     scanf("%s", codigo1);
     printf("Digite o nome da cidade da Carta 1: ");
@@ -37,7 +37,7 @@ int main() {
 
     // Leitura dos dados da segunda carta
     printf("\nDigite o estado (A-H) da Carta 2: ");
-    scanf(" %c", &estado2);
+    scanf(" %c", &estado2);  // Espaço antes de %c para evitar problemas com buffer
     printf("Digite o código da Carta 2 (ex: B02): ");
     scanf("%s", codigo2);
     printf("Digite o nome da cidade da Carta 2: ");
