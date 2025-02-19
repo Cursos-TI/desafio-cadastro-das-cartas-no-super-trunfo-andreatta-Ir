@@ -20,9 +20,9 @@ int main() {
     printf("Digite a população da cidade da Carta 1: ");
     scanf("%d", &populacao1);
     printf("Digite a área (em km²) da Carta 1: ");
-    scanf("%f", &area1);
+    scanf(" %f", &area1);  // Espaço antes de %f para evitar problemas com buffer
     printf("Digite o PIB (em bilhões de reais) da Carta 1: ");
-    scanf("%f", &pib1);
+    scanf(" %f", &pib1);  // Espaço antes de %f para evitar problemas com buffer
     printf("Digite o número de pontos turísticos da Carta 1: ");
     scanf("%d", &pontosTuristicos1);
 
@@ -45,9 +45,9 @@ int main() {
     printf("Digite a população da cidade da Carta 2: ");
     scanf("%d", &populacao2);
     printf("Digite a área (em km²) da Carta 2: ");
-    scanf("%f", &area2);
+    scanf(" %f", &area2);  // Espaço antes de %f para evitar problemas com buffer
     printf("Digite o PIB (em bilhões de reais) da Carta 2: ");
-    scanf("%f", &pib2);
+    scanf(" %f", &pib2);  // Espaço antes de %f para evitar problemas com buffer
     printf("Digite o número de pontos turísticos da Carta 2: ");
     scanf("%d", &pontosTuristicos2);
 
