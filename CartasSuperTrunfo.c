@@ -15,7 +15,7 @@ int main() {
     printf("Digite o nome da cidade 1: ");
     scanf(" %[^\n]", nomeCidade1); // Lê até a nova linha
     printf("Digite a população da cidade 1: ");
-    scanf("%d", &populacao1);
+    scanf("%lu", &populacao1);  // Corrigido para %lu
     printf("Digite a área da cidade 1 (em km²): ");
     scanf("%f", &area1);
     printf("Digite o PIB da cidade 1 (em bilhões de reais): ");
@@ -31,12 +31,12 @@ int main() {
     superPoder1 = (float)populacao1 + area1 + (pib1 * 1e9) + pontosTuristicos1 + (1.0 / densidadePopulacional1);
    
     // Declaração das variáveis para a primeira carta
-    char estado1[3], codigo1[4], nomeCidade1[50];
-    unsigned long int populaca2;
-    int pontosTuristicos1;
-    float area2, densidadePopulaciona2, pibPerCapita2, superPoder2;
+    char estado2[3], codigo2[4], nomeCidade2[50];
+    unsigned long int populacao2;
+    int pontosTuristicos2;
+    float area2, pib2, densidadePopulacional2, pibPerCapita2, superPoder2;
 
-     // Leitura dos dados da primeira carta
+     // Leitura dos dados da segunda carta
     printf("Digite o estado da cidade 2");
     scanf("%s", estado2);
     printf("Digite o código da carta 2 ");
@@ -44,7 +44,7 @@ int main() {
     printf("Digite o nome da cidade 2 ");
     scanf(" %[^\n]", nomeCidade2); // Lê até a nova linha
     printf("Digite a população da cidade 2: ");
-    scanf("%d", &populacao2);
+    scanf("%lu", &populacao2);  // Corrigido para %lu
     printf("Digite a área da cidade 2 (em km²): ");
     scanf("%f", &area2);
     printf("Digite o PIB da cidade 2 (em bilhões de reais): ");
@@ -57,7 +57,7 @@ int main() {
     pibPerCapita2 = (pib2 * 1e9) / populacao2; // Convertendo PIB de bilhões para reais
 
     // Cálculo do SuperPoder
-    superPoder2 = (float)populaca2 + area2 + (pib2 * 1e9) + pontosTuristicos2 + (1.0 / densidadePopulaciona2);
+    superPoder2 = (float)populacao2 + area2 + (pib2 * 1e9) + pontosTuristicos2 + (1.0 / densidadePopulacional2);
 
      // Exibição das comparações
      printf("\nComparacao de Cartas:\n");
