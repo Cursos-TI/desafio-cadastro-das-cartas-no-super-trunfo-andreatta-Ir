@@ -1,79 +1,84 @@
 #include <stdio.h>
 
-int main() {
-    // Declaração das variáveis para a primeira carta
-    char estado1[3], codigo1[4], nomeCidade1[50];
-    unsigned long int populacao1;
-    int pontosTuristicos1;
-    float area1, pib1, densidadePopulacional1, pibPerCapita1, superPoder1;
+// Estrutura para armazenar os dados da carta
+typedef struct {
+    char estado[3], codigo[4], nomeCidade[50];
+    unsigned long int populacao;
+    int pontosTuristicos;
+    float area, pib, densidade, pibPerCapita, superPoder;
+} Carta;
+
+// Função para ler os dados de uma carta
+void lerCarta(Carta *carta, int num) {
+    printf("\nDigite os dados da carta %d:\n", num);
+    printf("Estado: "); scanf("%s", carta->estado);
+    printf("Código: "); scanf("%s", carta->codigo);
+    printf("Nome da cidade: "); scanf(" %[^""]", carta->nomeCidade);
+    printf("População: "); scanf("%lu", &carta->populacao);
+    printf("Área (km²): "); scanf("%f", &carta->area);
+    printf("PIB (bilhões R$): "); scanf("%f", &carta->pib);
+    printf("Pontos turísticos: "); scanf("%d", &carta->pontosTuristicos);
     
-    // Leitura dos dados da primeira carta
-    printf("Digite o estado da cidade 1: ");
-    scanf("%s", estado1);
-    printf("Digite o código da carta 1: ");
-    scanf("%s", codigo1);
-    printf("Digite o nome da cidade 1: ");
-    scanf(" %[^\n]", nomeCidade1); // Lê até a nova linha
-    printf("Digite a população da cidade 1: ");
-    scanf("%lu", &populacao1);  // Corrigido para %lu
-    printf("Digite a área da cidade 1 (em km²): ");
-    scanf("%f", &area1);
-    printf("Digite o PIB da cidade 1 (em bilhões de reais): ");
-    scanf("%f", &pib1);
-    printf("Digite o número de pontos turísticos da cidade 1: ");
-    scanf("%d", &pontosTuristicos1);
+    // Cálculos automáticos
+    carta->densidade = carta->populacao / carta->area;
+    carta->pibPerCapita = (carta->pib * 1e9) / carta->populacao;
+}
 
-    // Cálculo da densidade populacional e PIB per capita para a primeira cidade
-    densidadePopulacional1 = populacao1 / area1;
-    pibPerCapita1 = (pib1 * 1e9) / populacao1; // Convertendo PIB de bilhões para reais
+// Função para exibir o menu de escolha de atributo
+int escolherAtributo(int escolhido) {
+    int opcao;
+    printf("\nEscolha um atributo:\n");
+    if (escolhido != 1) printf("1. População\n");
+    if (escolhido != 2) printf("2. Área\n");
+    if (escolhido != 3) printf("3. PIB\n");
+    if (escolhido != 4) printf("4. Pontos turísticos\n");
+    if (escolhido != 5) printf("5. Densidade populacional\n");
+    if (escolhido != 6) printf("6. PIB per capita\n");
+    printf("Digite sua escolha: ");
+    scanf("%d", &opcao);
+    return (opcao >= 1 && opcao <= 6 && opcao != escolhido) ? opcao : escolherAtributo(escolhido);
+}
 
-    // Cálculo do Super Poder 
-    superPoder1 = (float)populacao1 + area1 + (pib1 * 1e9) + pontosTuristicos1 + (1.0 / densidadePopulacional1);
-   
-    // Declaração das variáveis para a segunda carta
-    char estado2[3], codigo2[4], nomeCidade2[50];
-    unsigned long int populacao2;
-    int pontosTuristicos2;
-    float area2, pib2, densidadePopulacional2, pibPerCapita2, superPoder2;
-
-    // Leitura dos dados da segunda carta
-    printf("Digite o estado da cidade 2: ");
-    scanf("%s", estado2);
-    printf("Digite o código da carta 2: ");
-    scanf("%s", codigo2);
-    printf("Digite o nome da cidade 2: ");
-    scanf(" %[^\n]", nomeCidade2); // Lê até a nova linha
-    printf("Digite a população da cidade 2: ");
-    scanf("%lu", &populacao2);  // Corrigido para %lu
-    printf("Digite a área da cidade 2 (em km²): ");
-    scanf("%f", &area2);
-    printf("Digite o PIB da cidade 2 (em bilhões de reais): ");
-    scanf("%f", &pib2);
-    printf("Digite o número de pontos turísticos da cidade 2: ");
-    scanf("%d", &pontosTuristicos2);
-
-    // Cálculo da densidade populacional e PIB per capita para a segunda cidade
-    densidadePopulacional2 = populacao2 / area2;
-    pibPerCapita2 = (pib2 * 1e9) / populacao2; // Convertendo PIB de bilhões para reais
-
-    // Cálculo do SuperPoder
-    superPoder2 = (float)populacao2 + area2 + (pib2 * 1e9) + pontosTuristicos2 + (1.0 / densidadePopulacional2);
-
-    // Escolha do atributo para comparação ( População)
-    printf("\nComparacao de cartas (Atributo: População):\n");
-
-    // Comparação da população
-    printf(" Carta 1 - %s: População = %lu\n", nomeCidade1, populacao1);
-    printf(" Carta 2 - %s: População = %lu\n", nomeCidade2, populacao2);
-
-    // Decisão de quem venceu
-    if (populacao1 > populacao2) {
-        printf("Resultado: Carta 1 (%s) venceu!\n", nomeCidade1);
-    } else if (populacao2 > populacao1) {
-        printf("Resultado: Carta 2 (%s) venceu!\n", nomeCidade2);
-    } else {
-        printf("Resultado: Empate!\n");
+// Função para obter o valor do atributo escolhido
+float obterAtributo(Carta c, int atributo) {
+    switch (atributo) {
+        case 1: return c.populacao;
+        case 2: return c.area;
+        case 3: return c.pib;
+        case 4: return c.pontosTuristicos;
+        case 5: return 1 / c.densidade; // Densidade populacional inverte a lógica
+        case 6: return c.pibPerCapita;
     }
+    return 0;
+}
+
+// Função para determinar o vencedor com base nos atributos escolhidos
+void determinarVencedor(Carta c1, Carta c2, int atributo1, int atributo2) {
+    float v1_a1 = obterAtributo(c1, atributo1);
+    float v1_a2 = obterAtributo(c1, atributo2);
+    float v2_a1 = obterAtributo(c2, atributo1);
+    float v2_a2 = obterAtributo(c2, atributo2);
+    
+    printf("\n%s: %.2f (Atributo %d) + %.2f (Atributo %d) = %.2f\n", c1.nomeCidade, v1_a1, atributo1, v1_a2, atributo2, v1_a1 + v1_a2);
+    printf("%s: %.2f (Atributo %d) + %.2f (Atributo %d) = %.2f\n", c2.nomeCidade, v2_a1, atributo1, v2_a2, atributo2, v2_a1 + v2_a2);
+    
+    if (v1_a1 + v1_a2 > v2_a1 + v2_a2)
+        printf("%s venceu!\n", c1.nomeCidade);
+    else if (v2_a1 + v2_a2 > v1_a1 + v1_a2)
+        printf("%s venceu!\n", c2.nomeCidade);
+    else
+        printf("Empate!\n");
+}
+
+int main() {
+    Carta carta1, carta2;
+    lerCarta(&carta1, 1);
+    lerCarta(&carta2, 2);
+    
+    int atributo1 = escolherAtributo(0);
+    int atributo2 = escolherAtributo(atributo1);
+    
+    determinarVencedor(carta1, carta2, atributo1, atributo2);
     
     return 0;
 }
