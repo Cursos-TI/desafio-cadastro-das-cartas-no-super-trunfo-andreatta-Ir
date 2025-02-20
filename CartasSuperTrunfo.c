@@ -37,7 +37,7 @@ int main() {
     float area2, pib2, densidadePopulacional2, pibPerCapita2, superPoder2;
 
      // Leitura dos dados da segunda carta
-    printf("Digite o estado da cidade: 2");
+    printf("Digite o estado da cidade 2: ");
     scanf("%s", estado2);
     printf("Digite o código da carta 2: ");
     scanf("%s", codigo2);
